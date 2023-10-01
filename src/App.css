@@ -1,0 +1,41 @@
+/* address:{
+              street: String!
+              city:String!
+            }
+            company:{
+              name: String!
+            } 
+              // "type": "module",
+            
+              // {
+//   "title": "this is title",
+//   "description": "this is description"
+// }
+
+// {
+//   "id":"651821a6aff732d7a4bc63a9",
+//     "title": "this is title",
+//     "description": "this is update description"
+// }
+            
+            */
+
+.todos {
+  height: fit-content;
+  min-height: 100px;
+  width: 600px;
+  border-radius: 10px;
+  margin: 20px auto 0 auto;
+  background-color: #b7a8a8;
+  display: flex;
+  padding: 10px 0 10px 20px;
+}
+.data {
+  width: 90%;
+}
+.icon {
+  cursor: pointer;
+}
+.modal {
+  color: #629eec;
+}
