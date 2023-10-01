@@ -1,25 +1,3 @@
-/* address:{
-              street: String!
-              city:String!
-            }
-            company:{
-              name: String!
-            } 
-              // "type": "module",
-            
-              // {
-//   "title": "this is title",
-//   "description": "this is description"
-// }
-
-// {
-//   "id":"651821a6aff732d7a4bc63a9",
-//     "title": "this is title",
-//     "description": "this is update description"
-// }
-            
-            */
-
 .todos {
   height: fit-content;
   min-height: 100px;

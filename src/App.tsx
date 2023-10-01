@@ -130,7 +130,7 @@ function App() {
         </Container>
       </Navbar>
 
-      {/* fatch data from mongo */}
+      {/* fetch data from mongo */}
       {todo.map((todo, i) => (
         <div className="todos" key={i}>
           <div className="data">
