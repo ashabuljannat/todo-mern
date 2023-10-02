@@ -1,10 +1,14 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const { ApolloServer } = require("@apollo/server");
-const { expressMiddleware } = require("@apollo/server/express4");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const { default: axios } = require("axios");
+import { expressMiddleware } from "@apollo/server/express4";
+import { ApolloServer } from "@apollo/server";
+import mongoose from "mongoose";
+import express from "express";
+import cors from 'cors';
+import bodyParser from "body-parser";
+
+import typeDefs from "./schemas/typeDefs.js";
+import resolvers from "./resolvers/resolvers.js";
+import todoModel from "./models/models.js";
+
 
 const USERNAME = "2alifashabuljannat";
 const PASS = "xRUS7o24l1ch3It6";
@@ -15,67 +19,8 @@ const MONGODB_URI_DRIVER =
 async function startServer() {
   const app = express();
   const server = new ApolloServer({
-    typeDefs: `
-        type Post {
-            userId:ID
-            id: ID
-            title: String
-            body: String
-        }
-  
-        type User {
-            id: ID!
-            name: String!
-            username: String!
-            email: String!
-            phone: String!
-            website: String!    
-            post: Post
-        }
-
-        type Todo {
-            userId:ID!
-            id: ID!
-            title: String!
-            completed: Boolean
-        }
-
-     
-
-        type Query {
-            getTodos: [Todo]
-            getAllUsers: [User]
-            getPosts: [Post]
-            getUser(id: ID): User
-        }
-
-    `,
-    resolvers: {
-      User: {
-        post: (post) => async () =>
-          (
-            await axios.get(
-              `https://jsonplaceholder.typicode.com/posts/${post.id}/comments`
-            )
-          ).data,
-      },
-
-      Query: {
-        getTodos: async () =>
-          (await axios.get("https://jsonplaceholder.typicode.com/posts")).data,
-
-        getAllUsers: async () =>
-          (await axios.get("https://jsonplaceholder.typicode.com/users")).data
-            .address,
-
-        getUser: async (_, { id }) =>
-          (await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`))
-            .data,
-
-        getPosts: async () =>
-          (await axios.get("https://jsonplaceholder.typicode.com/posts")).data,
-      },
-    },
+    typeDefs,
+    resolvers,
   });
 
   app.use(bodyParser.json());
@@ -93,37 +38,26 @@ async function startServer() {
     })
     .catch((error) => console.log(error));
 
-  const todoSchema = new mongoose.Schema(
-    {
-      title: { type: String, required: true },
-      description: { type: String, required: true },
-    },
-    {
-      timestamps: true,
-    }
-  );
-  const todoModal = mongoose.model("Todo", todoSchema);
-
   app.get("/", async (req, res) => {
-    const data = await todoModal.find({});
+    const data = await todoModel.find({});
     res.json({ success: true, data: data });
   });
-  
+
   app.post("/create", async (req, res) => {
-    const data = await new todoModal(req.body).save();
+    const data = await new todoModel(req.body).save();
     res.json({ success: "Your Todo Saved Successfully...", create: data });
-  });         
+  });
 
   app.put("/update", async (req, res) => {
     const { id, ...updateData } = req.body;
-    const data = await todoModal.updateOne({ _id: req.body.id }, updateData);
+    const data = await todoModel.updateOne({ _id: req.body.id }, updateData);
     res.json({ success: "Your Todo Updated Successfully...", update: data });
   });
 
   app.delete("/delete/:id", async (req, res) => {
     const id = req.params.id;
-    const data = await todoModal.deleteOne({ _id: id });
-    res.json({ success: "Your Todo Deleted Successfully...",delete: data });
+    const data = await todoModel.deleteOne({ _id: id });
+    res.json({ success: "Your Todo Deleted Successfully...", delete: data });
   });
 
   app.listen(8000, () => console.log("Server Started at PORT 8000"));

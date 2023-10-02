@@ -49,7 +49,7 @@ function App() {
   };
   const addSubmit = async (e: any) => {
     e.preventDefault();
-    // console.log(addData);
+    // console.log(addData); https://youtube.com/shorts/LqPaOct_gFU?si=mpmr8J990EKCo_Rc
     const data = await axios.post("/create", addData);
     // console.log(data);
     alert(
