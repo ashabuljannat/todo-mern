@@ -24,22 +24,22 @@ const typeDefs = gql`
     completed: Boolean
   }
 
-  # type MongoAllTodo {
-  #   _id: String
-  #   title: String
-  #   description: String
-  #   createdAt: String
-  #   updatedAt: String
-  # }
+  type MongoAllTodo {
+    _id: String
+    title: String
+    description: String
+    createdAt: String
+    updatedAt: String
+  }
 
-  # input TodoInput {
-  #   title: String!
-  #   description: String!
-  # }
+  input TodoInput {
+    title: String!
+    description: String!
+  }
 
   type Query {
-    # getMongoAllTodo: [MongoAllTodo]
-    # createTodo(recipeInput: TodoInput): MongoAllTodo
+    getMongoAllTodo: [MongoAllTodo]
+    createTodo(recipeInput: TodoInput): MongoAllTodo
 
     getTodos: [Todo]
     getAllUsers: [User]

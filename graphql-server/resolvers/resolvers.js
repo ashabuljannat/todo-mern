@@ -14,22 +14,22 @@ const resolvers = {
 
   Query: {
     // getMAllTodo: async () => (await axios.get(todoModel.find())).data,
-    // getMongoAllTodo: async () => {
-    //   try {
-    //     const users = await todoModel.find();
-    //     return users;
-    //   } catch (error) {
-    //     throw new GraphQLError(error.message);
-    //   }
-    // },
+    getMongoAllTodo: async () => {
+      try {
+        const users = await todoModel.find();
+        return users;
+      } catch (error) {
+        throw new GraphQLError(error.message);
+      }
+    },
 
-    // createTodo: async (_, { recipeInput: { title, description } }) => {
-    //   const createTodo = await new todoModel({
-    //     title,
-    //     description,
-    //   }).save();
-    //   return createTodo;
-    // },
+    createTodo: async (_, { recipeInput: { title, description } }) => {
+      const createTodo = await new todoModel({
+        title,
+        description,
+      }).save();
+      return createTodo;
+    },
 
     getTodos: async () =>
       (await axios.get("https://jsonplaceholder.typicode.com/posts")).data,
