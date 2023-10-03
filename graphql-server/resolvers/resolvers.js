@@ -13,7 +13,7 @@ const resolvers = {
   },
 
   Query: {
-    // getMAllTodo: async () => (await axios.get(todoModel.find())).data,
+    // practice in my todo collection in mongodb api///////////////////////////
     getMongoAllTodo: async () => {
       try {
         const users = await todoModel.find();
@@ -23,14 +23,34 @@ const resolvers = {
       }
     },
 
-    createTodo: async (_, { recipeInput: { title, description } }) => {
+    createTodo: async (_, { todoInput: { title, description } }) => {
       const createTodo = await new todoModel({
         title,
         description,
       }).save();
-      return createTodo;
+      return {
+        message: "Todo Add Successfully...",
+      };
     },
 
+    deleteTodo: async (_, { id }) => {
+      const isDeleted = await todoModel.deleteOne({ _id: id });
+      return {
+        message: "Todo Deleted Successfully...",
+      };
+    },
+
+    updateTodo: async (_, { id, todoInput: { title, description } }) => {
+      const isEdited = await todoModel.updateOne(
+        { _id: id },
+        { title, description }
+      );
+      return {
+        message: "Todo Updated Successfully...",
+      };
+    },
+
+    // practice in online api///////////////////////////
     getTodos: async () =>
       (await axios.get("https://jsonplaceholder.typicode.com/posts")).data,
 

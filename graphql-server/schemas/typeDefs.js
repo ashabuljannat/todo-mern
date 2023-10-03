@@ -37,9 +37,16 @@ const typeDefs = gql`
     description: String!
   }
 
+  type todoResponse {
+    todoResponse: Boolean
+    message: String!
+  }
+
   type Query {
     getMongoAllTodo: [MongoAllTodo]
-    createTodo(recipeInput: TodoInput): MongoAllTodo
+    createTodo(todoInput: TodoInput): todoResponse
+    deleteTodo(id: ID!): todoResponse
+    updateTodo(id: ID!, todoInput: TodoInput): todoResponse
 
     getTodos: [Todo]
     getAllUsers: [User]
