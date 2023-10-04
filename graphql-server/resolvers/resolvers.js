@@ -23,14 +23,31 @@ const resolvers = {
       }
     },
 
+    // practice in online api///////////////////////////
+    getTodos: async () =>
+      (await axios.get("https://jsonplaceholder.typicode.com/posts")).data,
+
+    getAllUsers: async () =>
+      (await axios.get("https://jsonplaceholder.typicode.com/users")).data
+        .address,
+
+    getUser: async (_, { id }) =>
+      (await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`))
+        .data,
+
+    getPosts: async () =>
+      (await axios.get("https://jsonplaceholder.typicode.com/posts")).data,
+  },
+  Mutation: {
     createTodo: async (_, { todoInput: { title, description } }) => {
       const createTodo = await new todoModel({
         title,
         description,
       }).save();
-      return {
-        message: "Todo Add Successfully...",
-      };
+      // return {
+      //   message: "Todo Add Successfully...",
+      // };
+      return createTodo;
     },
 
     deleteTodo: async (_, { id }) => {
@@ -49,21 +66,6 @@ const resolvers = {
         message: "Todo Updated Successfully...",
       };
     },
-
-    // practice in online api///////////////////////////
-    getTodos: async () =>
-      (await axios.get("https://jsonplaceholder.typicode.com/posts")).data,
-
-    getAllUsers: async () =>
-      (await axios.get("https://jsonplaceholder.typicode.com/users")).data
-        .address,
-
-    getUser: async (_, { id }) =>
-      (await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`))
-        .data,
-
-    getPosts: async () =>
-      (await axios.get("https://jsonplaceholder.typicode.com/posts")).data,
   },
 };
 

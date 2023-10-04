@@ -25,9 +25,9 @@ const typeDefs = gql`
   }
 
   type MongoAllTodo {
-    _id: String
-    title: String
-    description: String
+    _id: String!
+    title: String!
+    description: String!
     createdAt: String
     updatedAt: String
   }
@@ -42,11 +42,14 @@ const typeDefs = gql`
     message: String!
   }
 
-  type Query {
-    getMongoAllTodo: [MongoAllTodo]
-    createTodo(todoInput: TodoInput): todoResponse
+  type Mutation {
+    createTodo(todoInput: TodoInput): MongoAllTodo!
     deleteTodo(id: ID!): todoResponse
     updateTodo(id: ID!, todoInput: TodoInput): todoResponse
+  }
+
+  type Query {
+    getMongoAllTodo: [MongoAllTodo]   
 
     getTodos: [Todo]
     getAllUsers: [User]

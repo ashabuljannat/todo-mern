@@ -17,3 +17,7 @@
 .modal {
   color: #629eec;
 }
+.reverse{
+  display: flex;
+  flex-direction: column-reverse;
+}

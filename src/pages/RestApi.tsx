@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
 import "../App.css";
-import {
-  Button,
-  Container,
-  Form,
-  Modal,
-  Nav,
-  Navbar
-} from "react-bootstrap";
+import { Button, Container, Form, Modal, Nav, Navbar } from "react-bootstrap";
 import { HiPencilAlt, HiOutlineTrash } from "react-icons/hi";
 import axios from "axios";
 
@@ -103,7 +96,7 @@ const RestApi = () => {
             <Nav className="me-auto">
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/restapi">rest-api</Nav.Link>
-              <Nav.Link href="/graphql">graphql</Nav.Link>            
+              <Nav.Link href="/graphql">graphql</Nav.Link>
             </Nav>
           </Navbar.Collapse>
           <Button
@@ -117,11 +110,11 @@ const RestApi = () => {
       </Navbar>
 
       {/* fetch data from mongo */}
-      {todo.map((todo, i) => (
+      {todo?.map((todo: any, i) => (
         <div className="todos" key={i}>
           <div className="data">
-            <h4>{todo.title}</h4>
-            <h5>{todo.description}</h5>
+            <h4>{todo?.title}</h4>
+            <h5>{todo?.description}</h5>
           </div>
           <div>
             <HiPencilAlt
