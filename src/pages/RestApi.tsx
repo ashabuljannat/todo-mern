@@ -4,7 +4,9 @@ import { Button, Container, Form, Modal, Nav, Navbar } from "react-bootstrap";
 import { HiPencilAlt, HiOutlineTrash } from "react-icons/hi";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:8000";
+// axios.defaults.baseURL = "http://localhost:8000";
+axios.defaults.baseURL = "https://express-graphql-alif-dev.koyeb.app/";
+
 
 const RestApi = () => {
   const [todo, setTodo] = useState([]);
