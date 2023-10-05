@@ -10,7 +10,8 @@ import {
 } from "@apollo/client";
 
 export const client = new ApolloClient({
-  uri: "http://localhost:8000/graphql",
+  // uri: "http://localhost:8000/graphql",
+  uri: "https://express-graphql-alif-dev.koyeb.app/graphql",
   cache: new InMemoryCache(),
 });
 
